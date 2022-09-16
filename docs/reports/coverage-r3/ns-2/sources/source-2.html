@@ -1,0 +1,175 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ProfileController</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+    @import "../../.css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../.js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">gr.aueb.sweng22.team09.domainlogic.controller</a>
+</div>
+
+<h1>Coverage Summary for Class: ProfileController (gr.aueb.sweng22.team09.domainlogic.controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ProfileController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.7%
+  </span>
+  <span class="absValue">
+    (6/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (15/20)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package gr.aueb.sweng22.team09.domainlogic.controller;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import java.io.File;
+<i class="no-highlight">4</i>&nbsp;import java.security.NoSuchAlgorithmException;
+<i class="no-highlight">5</i>&nbsp;import java.security.spec.InvalidKeySpecException;
+<i class="no-highlight">6</i>&nbsp;import java.security.spec.KeySpec;
+<i class="no-highlight">7</i>&nbsp;import java.sql.SQLException;
+<i class="no-highlight">8</i>&nbsp;import java.util.NoSuchElementException;
+<i class="no-highlight">9</i>&nbsp;
+<i class="no-highlight">10</i>&nbsp;import javax.crypto.SecretKeyFactory;
+<i class="no-highlight">11</i>&nbsp;import javax.crypto.spec.PBEKeySpec;
+<i class="no-highlight">12</i>&nbsp;
+<i class="no-highlight">13</i>&nbsp;import gr.aueb.sweng22.team09.domainlogic.entities.User;
+<i class="no-highlight">14</i>&nbsp;import gr.aueb.sweng22.team09.domainlogic.model.IModel;
+<i class="no-highlight">15</i>&nbsp;
+<i class="no-highlight">16</i>&nbsp;public class ProfileController implements IProfileController {
+<i class="no-highlight">17</i>&nbsp;
+<i class="no-highlight">18</i>&nbsp;    // TODO: exception handling
+<i class="no-highlight">19</i>&nbsp;
+<i class="no-highlight">20</i>&nbsp;    private IModel model;
+<i class="no-highlight">21</i>&nbsp;
+<b class="fc"><i class="no-highlight">22</i>&nbsp;    public ProfileController(IModel model) {</b>
+<b class="fc"><i class="no-highlight">23</i>&nbsp;        this.model = model;</b>
+<b class="fc"><i class="no-highlight">24</i>&nbsp;    }</b>
+<i class="no-highlight">25</i>&nbsp;
+<i class="no-highlight">26</i>&nbsp;    public String encrypt(String password) {
+<b class="fc"><i class="no-highlight">27</i>&nbsp;        byte[] salt = new byte[16];</b>
+<b class="fc"><i class="no-highlight">28</i>&nbsp;        KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);</b>
+<i class="no-highlight">29</i>&nbsp;        try{
+<b class="fc"><i class="no-highlight">30</i>&nbsp;            SecretKeyFactory factory = SecretKeyFactory.getInstance(&quot;PBKDF2WithHmacSHA1&quot;);</b>
+<b class="fc"><i class="no-highlight">31</i>&nbsp;            byte[] hash = factory.generateSecret(spec).getEncoded();</b>
+<b class="fc"><i class="no-highlight">32</i>&nbsp;            return new String(hash);</b>
+<b class="nc"><i class="no-highlight">33</i>&nbsp;        } catch(NoSuchAlgorithmException | InvalidKeySpecException ae){</b>
+<b class="nc"><i class="no-highlight">34</i>&nbsp;            throw new RuntimeException(&quot;Could not securely encrypt password.&quot;, ae);</b>
+<i class="no-highlight">35</i>&nbsp;        }
+<i class="no-highlight">36</i>&nbsp;    }
+<i class="no-highlight">37</i>&nbsp;
+<i class="no-highlight">38</i>&nbsp;    @Override
+<i class="no-highlight">39</i>&nbsp;    public boolean userExists(User user) {
+<b class="fc"><i class="no-highlight">40</i>&nbsp;        return model.userExists(user);</b>
+<i class="no-highlight">41</i>&nbsp;    }
+<i class="no-highlight">42</i>&nbsp;
+<i class="no-highlight">43</i>&nbsp;    @Override
+<i class="no-highlight">44</i>&nbsp;    public void register(User user) {
+<b class="fc"><i class="no-highlight">45</i>&nbsp;        model.addUser(user);</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;    }</b>
+<i class="no-highlight">47</i>&nbsp;
+<i class="no-highlight">48</i>&nbsp;    @Override
+<i class="no-highlight">49</i>&nbsp;    public void setProfileDetails(User user) {
+<i class="no-highlight">50</i>&nbsp;        try {
+<b class="fc"><i class="no-highlight">51</i>&nbsp;            model.updateUser(user);</b>
+<b class="nc"><i class="no-highlight">52</i>&nbsp;        } catch (NoSuchElementException e) {</b>
+<b class="nc"><i class="no-highlight">53</i>&nbsp;            e.printStackTrace();</b>
+<b class="fc"><i class="no-highlight">54</i>&nbsp;        }</b>
+<b class="fc"><i class="no-highlight">55</i>&nbsp;    }</b>
+<i class="no-highlight">56</i>&nbsp;
+<i class="no-highlight">57</i>&nbsp;    @Override
+<i class="no-highlight">58</i>&nbsp;    public String getPassword(String username) {
+<b class="fc"><i class="no-highlight">59</i>&nbsp;        return model.getPassword(username);</b>
+<i class="no-highlight">60</i>&nbsp;    }
+<i class="no-highlight">61</i>&nbsp;
+<i class="no-highlight">62</i>&nbsp;    @Override
+<i class="no-highlight">63</i>&nbsp;    public void dumpStatistics(File file) {
+<i class="no-highlight">64</i>&nbsp;        try {
+<i class="no-highlight">65</i>&nbsp;            // TODO: write
+<i class="no-highlight">66</i>&nbsp;        } catch (RuntimeException e) {
+<i class="no-highlight">67</i>&nbsp;            e.printStackTrace();
+<i class="no-highlight">68</i>&nbsp;        }
+<b class="nc"><i class="no-highlight">69</i>&nbsp;    }</b>
+<i class="no-highlight">70</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-05-16 23:51</div>
+</div>
+</body>
+</html>

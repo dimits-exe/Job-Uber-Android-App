@@ -1,0 +1,339 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Model</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+    @import "../../.css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../.js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">gr.aueb.sweng22.team09.domainlogic.model</a>
+</div>
+
+<h1>Coverage Summary for Class: Model (gr.aueb.sweng22.team09.domainlogic.model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Model</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    95.2%
+  </span>
+  <span class="absValue">
+    (20/21)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    94.8%
+  </span>
+  <span class="absValue">
+    (92/97)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package gr.aueb.sweng22.team09.domainlogic.model;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import android.os.Build;
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;import androidx.annotation.RequiresApi;
+<i class="no-highlight">6</i>&nbsp;
+<i class="no-highlight">7</i>&nbsp;import java.util.Collection;
+<i class="no-highlight">8</i>&nbsp;import java.util.HashSet;
+<i class="no-highlight">9</i>&nbsp;import java.util.NoSuchElementException;
+<i class="no-highlight">10</i>&nbsp;
+<i class="no-highlight">11</i>&nbsp;import gr.aueb.sweng22.team09.domainlogic.entities.Job;
+<i class="no-highlight">12</i>&nbsp;import gr.aueb.sweng22.team09.domainlogic.entities.JobSearchConstraints;
+<i class="no-highlight">13</i>&nbsp;import gr.aueb.sweng22.team09.domainlogic.entities.Rating;
+<i class="no-highlight">14</i>&nbsp;import gr.aueb.sweng22.team09.domainlogic.entities.TimeConstraint;
+<i class="no-highlight">15</i>&nbsp;import gr.aueb.sweng22.team09.domainlogic.entities.User;
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;/**An implementation of the IModel Interface
+<i class="no-highlight">18</i>&nbsp; *
+<i class="no-highlight">19</i>&nbsp; * Author: Ioannis Gkionis
+<i class="no-highlight">20</i>&nbsp; *
+<i class="no-highlight">21</i>&nbsp; */
+<i class="no-highlight">22</i>&nbsp;public class Model implements IModel {
+<i class="no-highlight">23</i>&nbsp;
+<i class="no-highlight">24</i>&nbsp;	private final Collection&lt;User&gt; users;
+<i class="no-highlight">25</i>&nbsp;	private final Collection&lt;Job&gt; jobs;
+<i class="no-highlight">26</i>&nbsp;	private final Collection&lt;Rating&gt; ratings;
+<i class="no-highlight">27</i>&nbsp;
+<i class="no-highlight">28</i>&nbsp;	/**Constructs an instance of Model class
+<i class="no-highlight">29</i>&nbsp;	 *
+<i class="no-highlight">30</i>&nbsp;	 */
+<b class="fc"><i class="no-highlight">31</i>&nbsp;	public Model () {</b>
+<b class="fc"><i class="no-highlight">32</i>&nbsp;		users = new HashSet&lt;&gt;();</b>
+<b class="fc"><i class="no-highlight">33</i>&nbsp;		jobs = new HashSet&lt;&gt;();</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;		ratings = new HashSet&lt;&gt;();</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;	}</b>
+<i class="no-highlight">36</i>&nbsp;
+<i class="no-highlight">37</i>&nbsp;	/**Constructs an instance of Model class
+<i class="no-highlight">38</i>&nbsp;	 *
+<i class="no-highlight">39</i>&nbsp;	 * @param users the users
+<i class="no-highlight">40</i>&nbsp;	 * @param jobs the jobs
+<i class="no-highlight">41</i>&nbsp;	 * @param ratings the ratings
+<i class="no-highlight">42</i>&nbsp;	 */
+<b class="fc"><i class="no-highlight">43</i>&nbsp;	public Model (Collection&lt;User&gt; users, Collection&lt;Job&gt; jobs, Collection&lt;Rating&gt; ratings) {</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;		this.users=users;</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;		this.jobs=jobs;</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;		this.ratings=ratings;</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;	}</b>
+<i class="no-highlight">48</i>&nbsp;
+<i class="no-highlight">49</i>&nbsp;	@Override
+<i class="no-highlight">50</i>&nbsp;	public boolean userExists(User user) {
+<b class="fc"><i class="no-highlight">51</i>&nbsp;		return (users.contains(user));</b>
+<i class="no-highlight">52</i>&nbsp;	}
+<i class="no-highlight">53</i>&nbsp;
+<i class="no-highlight">54</i>&nbsp;	@Override
+<i class="no-highlight">55</i>&nbsp;	public void addUser(User user) {
+<b class="fc"><i class="no-highlight">56</i>&nbsp;		users.add(user);</b>
+<b class="fc"><i class="no-highlight">57</i>&nbsp;	}</b>
+<i class="no-highlight">58</i>&nbsp;
+<i class="no-highlight">59</i>&nbsp;	@Override
+<i class="no-highlight">60</i>&nbsp;	public void updateUser(User user) throws NoSuchElementException {
+<b class="fc"><i class="no-highlight">61</i>&nbsp;		if (!users.contains(user))</b>
+<b class="fc"><i class="no-highlight">62</i>&nbsp;			throw new NoSuchElementException(&quot;user&quot;+user+&quot; does not exist in database&quot;);</b>
+<b class="fc"><i class="no-highlight">63</i>&nbsp;		users.add(user);</b>
+<b class="fc"><i class="no-highlight">64</i>&nbsp;	}</b>
+<i class="no-highlight">65</i>&nbsp;
+<i class="no-highlight">66</i>&nbsp;	@Override
+<i class="no-highlight">67</i>&nbsp;	public void updateJob(Job job) throws NoSuchElementException {
+<b class="fc"><i class="no-highlight">68</i>&nbsp;		if (!jobs.contains(job))</b>
+<b class="fc"><i class="no-highlight">69</i>&nbsp;			throw new NoSuchElementException(&quot;job&quot; + job + &quot; does not exist in database&quot;);</b>
+<b class="fc"><i class="no-highlight">70</i>&nbsp;		jobs.add(job); }</b>
+<i class="no-highlight">71</i>&nbsp;
+<i class="no-highlight">72</i>&nbsp;	@Override
+<i class="no-highlight">73</i>&nbsp;	public String getPassword(String username){//this probably breaks if u insert a username that doesnt exist in the DB
+<b class="fc"><i class="no-highlight">74</i>&nbsp;		String password=&quot;&quot;;</b>
+<b class="fc"><i class="no-highlight">75</i>&nbsp;		for (User u : users) {</b>
+<b class="fc"><i class="no-highlight">76</i>&nbsp;			if (u.getUsername().equals(username)) {</b>
+<b class="fc"><i class="no-highlight">77</i>&nbsp;				password=u.getPassword();</b>
+<b class="fc"><i class="no-highlight">78</i>&nbsp;				break;</b>
+<i class="no-highlight">79</i>&nbsp;			}
+<b class="nc"><i class="no-highlight">80</i>&nbsp;		}</b>
+<b class="fc"><i class="no-highlight">81</i>&nbsp;		return password;</b>
+<i class="no-highlight">82</i>&nbsp;	}
+<i class="no-highlight">83</i>&nbsp;
+<i class="no-highlight">84</i>&nbsp;
+<i class="no-highlight">85</i>&nbsp;	@Override
+<i class="no-highlight">86</i>&nbsp;	public void addJobRequest(Job job) {
+<b class="fc"><i class="no-highlight">87</i>&nbsp;		jobs.add(job);</b>
+<b class="fc"><i class="no-highlight">88</i>&nbsp;	}</b>
+<i class="no-highlight">89</i>&nbsp;
+<i class="no-highlight">90</i>&nbsp;	@RequiresApi(api = Build.VERSION_CODES.O)
+<i class="no-highlight">91</i>&nbsp;	@Override
+<i class="no-highlight">92</i>&nbsp;	public Collection&lt;Job&gt; getJobRequests(JobSearchConstraints constraints) {
+<b class="fc"><i class="no-highlight">93</i>&nbsp;		HashSet&lt;Job&gt; potentialJobs = new HashSet&lt;&gt;();</b>
+<i class="no-highlight">94</i>&nbsp;
+<i class="no-highlight">95</i>&nbsp;		// check jobs fulfilling the search constraints
+<b class="fc"><i class="no-highlight">96</i>&nbsp;		for (Job job : jobs) {</b>
+<b class="fc"><i class="no-highlight">97</i>&nbsp;			TimeConstraint jobTimeConstraint = job.getDuration();</b>
+<b class="fc"><i class="no-highlight">98</i>&nbsp;			TimeConstraint userTimeConstraint = constraints.getDuration();</b>
+<i class="no-highlight">99</i>&nbsp;
+<i class="no-highlight">100</i>&nbsp;			// if starting date earlier than constraint
+<b class="fc"><i class="no-highlight">101</i>&nbsp;			if(jobTimeConstraint.getStartingDate().compareTo(</b>
+<b class="fc"><i class="no-highlight">102</i>&nbsp;					userTimeConstraint.getStartingDate()) &lt; 0) {</b>
+<b class="fc"><i class="no-highlight">103</i>&nbsp;				continue;</b>
+<i class="no-highlight">104</i>&nbsp;			}
+<i class="no-highlight">105</i>&nbsp;
+<i class="no-highlight">106</i>&nbsp;			// if deadline later than constraint
+<b class="fc"><i class="no-highlight">107</i>&nbsp;			if(jobTimeConstraint.getDeadline().compareTo(userTimeConstraint.getDeadline()) &gt; 0) {</b>
+<b class="fc"><i class="no-highlight">108</i>&nbsp;				continue;</b>
+<i class="no-highlight">109</i>&nbsp;			}
+<i class="no-highlight">110</i>&nbsp;
+<i class="no-highlight">111</i>&nbsp;			// if compensation lower than constraint
+<b class="fc"><i class="no-highlight">112</i>&nbsp;			if(job.getCompensation().compareTo(constraints.getCompensation()) &lt; 0) {</b>
+<b class="nc"><i class="no-highlight">113</i>&nbsp;				continue;</b>
+<i class="no-highlight">114</i>&nbsp;			}
+<i class="no-highlight">115</i>&nbsp;
+<i class="no-highlight">116</i>&nbsp;			//if not all above job should be shown
+<b class="fc"><i class="no-highlight">117</i>&nbsp;			potentialJobs.add(job);</b>
+<b class="fc"><i class="no-highlight">118</i>&nbsp;		}</b>
+<i class="no-highlight">119</i>&nbsp;
+<i class="no-highlight">120</i>&nbsp;		//TODO: only return 50 at a time
+<b class="fc"><i class="no-highlight">121</i>&nbsp;		return potentialJobs;</b>
+<i class="no-highlight">122</i>&nbsp;	}
+<i class="no-highlight">123</i>&nbsp;
+<i class="no-highlight">124</i>&nbsp;	@Override
+<i class="no-highlight">125</i>&nbsp;	public void removeJobRequest(Job job) throws NoSuchElementException {
+<b class="fc"><i class="no-highlight">126</i>&nbsp;		if (!jobs.contains(job))</b>
+<b class="fc"><i class="no-highlight">127</i>&nbsp;			throw new NoSuchElementException(&quot;job&quot; +job+&quot; does not exist in database&quot;);</b>
+<b class="fc"><i class="no-highlight">128</i>&nbsp;		jobs.remove(job);</b>
+<b class="fc"><i class="no-highlight">129</i>&nbsp;	}</b>
+<i class="no-highlight">130</i>&nbsp;
+<i class="no-highlight">131</i>&nbsp;	@Override
+<i class="no-highlight">132</i>&nbsp;	public void addInterestedWorkerForJobs(Collection&lt;Job&gt; jobsS, User user) throws NoSuchElementException {
+<b class="fc"><i class="no-highlight">133</i>&nbsp;		for (Job job : jobsS){</b>
+<b class="fc"><i class="no-highlight">134</i>&nbsp;			if (!this.jobs.contains(job))</b>
+<b class="fc"><i class="no-highlight">135</i>&nbsp;				throw new NoSuchElementException(&quot;job&quot;+job+&quot; does not exist in database&quot;);</b>
+<b class="fc"><i class="no-highlight">136</i>&nbsp;		}</b>
+<b class="fc"><i class="no-highlight">137</i>&nbsp;		if (!users.contains(user))</b>
+<b class="fc"><i class="no-highlight">138</i>&nbsp;			throw new NoSuchElementException(&quot;user&quot;+user+&quot; does not exist in database&quot;);</b>
+<b class="fc"><i class="no-highlight">139</i>&nbsp;		for (Job job : jobsS) {</b>
+<b class="fc"><i class="no-highlight">140</i>&nbsp;			job.addInterested(user);</b>
+<b class="fc"><i class="no-highlight">141</i>&nbsp;			user.addJobInterest(job);</b>
+<b class="fc"><i class="no-highlight">142</i>&nbsp;		}</b>
+<b class="fc"><i class="no-highlight">143</i>&nbsp;	}</b>
+<i class="no-highlight">144</i>&nbsp;
+<i class="no-highlight">145</i>&nbsp;	@Override
+<i class="no-highlight">146</i>&nbsp;	public Collection&lt;User&gt; getInterestedWorkersForJob(Job job) throws NoSuchElementException {
+<b class="fc"><i class="no-highlight">147</i>&nbsp;		if (!jobs.contains(job))</b>
+<b class="fc"><i class="no-highlight">148</i>&nbsp;			throw new NoSuchElementException(&quot;job &quot; + job + &quot; does not exist in database&quot;);</b>
+<b class="fc"><i class="no-highlight">149</i>&nbsp;		return job.getInterestedWorkers();</b>
+<i class="no-highlight">150</i>&nbsp;	}
+<i class="no-highlight">151</i>&nbsp;
+<i class="no-highlight">152</i>&nbsp;	@Override
+<i class="no-highlight">153</i>&nbsp;	public void removeInterestedWorkerFromJob(Collection&lt;Job&gt; jobsS, User user) throws NoSuchElementException {
+<b class="fc"><i class="no-highlight">154</i>&nbsp;		for (Job job : jobsS){</b>
+<b class="fc"><i class="no-highlight">155</i>&nbsp;			if (!this.jobs.contains(job))</b>
+<b class="nc"><i class="no-highlight">156</i>&nbsp;				throw new NoSuchElementException(&quot;job&quot;+job+&quot; does not exist in database&quot;);</b>
+<b class="fc"><i class="no-highlight">157</i>&nbsp;		}</b>
+<b class="fc"><i class="no-highlight">158</i>&nbsp;		if (!users.contains(user))</b>
+<b class="fc"><i class="no-highlight">159</i>&nbsp;			throw new NoSuchElementException(&quot;user&quot;+user+&quot; does not exist in database&quot;);</b>
+<b class="fc"><i class="no-highlight">160</i>&nbsp;		for (Job job : jobsS) {</b>
+<b class="fc"><i class="no-highlight">161</i>&nbsp;			job.removeInterest(user);</b>
+<b class="fc"><i class="no-highlight">162</i>&nbsp;		}</b>
+<b class="fc"><i class="no-highlight">163</i>&nbsp;	}</b>
+<i class="no-highlight">164</i>&nbsp;
+<i class="no-highlight">165</i>&nbsp;	@Override
+<i class="no-highlight">166</i>&nbsp;	public void setWorkerSelectedForJob(Job job, User user) throws NoSuchElementException {
+<b class="fc"><i class="no-highlight">167</i>&nbsp;		if (!jobs.contains(job))</b>
+<b class="fc"><i class="no-highlight">168</i>&nbsp;			throw new NoSuchElementException(&quot;job&quot;+job+&quot; does not exist in database&quot;);</b>
+<b class="fc"><i class="no-highlight">169</i>&nbsp;		if (!users.contains(user))</b>
+<b class="fc"><i class="no-highlight">170</i>&nbsp;			throw new NoSuchElementException(&quot;user&quot;+user+&quot; does not exist in database&quot;);</b>
+<b class="fc"><i class="no-highlight">171</i>&nbsp;		job.assignWorker(user);</b>
+<b class="fc"><i class="no-highlight">172</i>&nbsp;	}</b>
+<i class="no-highlight">173</i>&nbsp;
+<i class="no-highlight">174</i>&nbsp;	@Override
+<i class="no-highlight">175</i>&nbsp;	public void markJobCompleted(Job job) throws NoSuchElementException {
+<b class="fc"><i class="no-highlight">176</i>&nbsp;		if (!jobs.contains(job))</b>
+<b class="fc"><i class="no-highlight">177</i>&nbsp;			throw new NoSuchElementException(&quot;job&quot;+job+&quot; does not exist in database&quot;);</b>
+<i class="no-highlight">178</i>&nbsp;
+<b class="fc"><i class="no-highlight">179</i>&nbsp;		job.setStatus(Job.Status.COMPLETE);</b>
+<b class="fc"><i class="no-highlight">180</i>&nbsp;	}</b>
+<i class="no-highlight">181</i>&nbsp;
+<i class="no-highlight">182</i>&nbsp;	@Override
+<i class="no-highlight">183</i>&nbsp;	public Collection&lt;Job&gt; getCompletedJobsForWorker(User user) throws NoSuchElementException {
+<b class="fc"><i class="no-highlight">184</i>&nbsp;		if (!users.contains(user))</b>
+<b class="fc"><i class="no-highlight">185</i>&nbsp;			throw new NoSuchElementException(&quot;User &quot;+user+&quot; does not exist in database&quot;);</b>
+<i class="no-highlight">186</i>&nbsp;
+<b class="fc"><i class="no-highlight">187</i>&nbsp;		HashSet&lt;Job&gt; tempjobs = new HashSet&lt;&gt;();</b>
+<b class="fc"><i class="no-highlight">188</i>&nbsp;		for (Job j : jobs){</b>
+<b class="fc"><i class="no-highlight">189</i>&nbsp;			if (j.getStatus() == Job.Status.COMPLETE &amp;&amp; j.getWorker().equals(user)) {</b>
+<i class="no-highlight">190</i>&nbsp;				// maybe not check this in the model lmao
+<b class="fc"><i class="no-highlight">191</i>&nbsp;				tempjobs.add(j);</b>
+<i class="no-highlight">192</i>&nbsp;			}
+<b class="fc"><i class="no-highlight">193</i>&nbsp;		}</b>
+<b class="fc"><i class="no-highlight">194</i>&nbsp;		return tempjobs;</b>
+<i class="no-highlight">195</i>&nbsp;	}
+<i class="no-highlight">196</i>&nbsp;
+<i class="no-highlight">197</i>&nbsp;	@Override
+<i class="no-highlight">198</i>&nbsp;	public void addRating(Rating rating) {
+<b class="nc"><i class="no-highlight">199</i>&nbsp;		ratings.add(rating);</b>
+<b class="nc"><i class="no-highlight">200</i>&nbsp;	}</b>
+<i class="no-highlight">201</i>&nbsp;
+<i class="no-highlight">202</i>&nbsp;	@Override
+<i class="no-highlight">203</i>&nbsp;	public Collection&lt;Rating&gt; getRatingsForWorker(User user) throws NoSuchElementException {
+<b class="fc"><i class="no-highlight">204</i>&nbsp;		if (!users.contains(user))</b>
+<b class="fc"><i class="no-highlight">205</i>&nbsp;			throw new NoSuchElementException(&quot;user&quot;+user+&quot; does not exist in database&quot;);</b>
+<b class="fc"><i class="no-highlight">206</i>&nbsp;		return user.getRatings();</b>
+<i class="no-highlight">207</i>&nbsp;	}
+<i class="no-highlight">208</i>&nbsp;
+<i class="no-highlight">209</i>&nbsp;	/**returns all users
+<i class="no-highlight">210</i>&nbsp;	 *
+<i class="no-highlight">211</i>&nbsp;	 * @return all users in the database
+<i class="no-highlight">212</i>&nbsp;	 */
+<i class="no-highlight">213</i>&nbsp;	public Collection&lt;User&gt; getUsers() {
+<b class="fc"><i class="no-highlight">214</i>&nbsp;		return users;</b>
+<i class="no-highlight">215</i>&nbsp;	}
+<i class="no-highlight">216</i>&nbsp;
+<i class="no-highlight">217</i>&nbsp;	/**returns all jobs
+<i class="no-highlight">218</i>&nbsp;	 *
+<i class="no-highlight">219</i>&nbsp;	 * @return all jobs in the database
+<i class="no-highlight">220</i>&nbsp;	 */
+<i class="no-highlight">221</i>&nbsp;	public Collection&lt;Job&gt; getJobs() {
+<b class="fc"><i class="no-highlight">222</i>&nbsp;		return jobs;</b>
+<i class="no-highlight">223</i>&nbsp;	}
+<i class="no-highlight">224</i>&nbsp;
+<i class="no-highlight">225</i>&nbsp;	/**returns all ratings
+<i class="no-highlight">226</i>&nbsp;	 *
+<i class="no-highlight">227</i>&nbsp;	 * @return all ratings in the database
+<i class="no-highlight">228</i>&nbsp;	 */
+<i class="no-highlight">229</i>&nbsp;	public Collection&lt;Rating&gt; getRatings() {
+<b class="fc"><i class="no-highlight">230</i>&nbsp;		return ratings;</b>
+<i class="no-highlight">231</i>&nbsp;	}
+<i class="no-highlight">232</i>&nbsp;
+<i class="no-highlight">233</i>&nbsp;
+<i class="no-highlight">234</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-05-16 23:51</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,210 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > JobFormPresenter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">gr.aueb.sweng22.team09.ui.jobform</a>
+</div>
+
+<h1>Coverage Summary for Class: JobFormPresenter (gr.aueb.sweng22.team09.ui.jobform)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JobFormPresenter</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (32/40)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package gr.aueb.sweng22.team09.ui.jobform;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import android.os.Build;
+<i class="no-highlight">4</i>&nbsp;import android.util.Log;
+<i class="no-highlight">5</i>&nbsp;
+<i class="no-highlight">6</i>&nbsp;import androidx.annotation.RequiresApi;
+<i class="no-highlight">7</i>&nbsp;
+<i class="no-highlight">8</i>&nbsp;import org.joda.money.CurrencyUnit;
+<i class="no-highlight">9</i>&nbsp;import org.joda.money.Money;
+<i class="no-highlight">10</i>&nbsp;
+<i class="no-highlight">11</i>&nbsp;import java.time.LocalDate;
+<i class="no-highlight">12</i>&nbsp;
+<i class="no-highlight">13</i>&nbsp;import gr.aueb.sweng22.team09.domainlogic.dao.IJobDAO;
+<i class="no-highlight">14</i>&nbsp;import gr.aueb.sweng22.team09.domainlogic.entities.Job;
+<i class="no-highlight">15</i>&nbsp;import gr.aueb.sweng22.team09.domainlogic.entities.TimeConstraint;
+<i class="no-highlight">16</i>&nbsp;import gr.aueb.sweng22.team09.domainlogic.entities.User;
+<i class="no-highlight">17</i>&nbsp;import gr.aueb.sweng22.team09.ui.strategies.CustomDateParsingStrategy;
+<i class="no-highlight">18</i>&nbsp;import gr.aueb.sweng22.team09.ui.strategies.IDateParsingStrategy;
+<i class="no-highlight">19</i>&nbsp;
+<i class="no-highlight">20</i>&nbsp;/**
+<i class="no-highlight">21</i>&nbsp; * A presenter parsing user provided arguments from the form, in order to register
+<i class="no-highlight">22</i>&nbsp; * a new {@link Job} to the System.
+<i class="no-highlight">23</i>&nbsp; *
+<i class="no-highlight">24</i>&nbsp; * @author Dimitris Tsirmpas
+<i class="no-highlight">25</i>&nbsp; */
+<i class="no-highlight">26</i>&nbsp;class JobFormPresenter {
+<i class="no-highlight">27</i>&nbsp;    private final IJobFormView view;
+<i class="no-highlight">28</i>&nbsp;    private final IJobDAO jobDAO;
+<i class="no-highlight">29</i>&nbsp;    private final User user;
+<b class="fc"><i class="no-highlight">30</i>&nbsp;    private final IDateParsingStrategy dateParsingStrategy = new CustomDateParsingStrategy();</b>
+<i class="no-highlight">31</i>&nbsp;
+<b class="fc"><i class="no-highlight">32</i>&nbsp;    public JobFormPresenter(IJobFormView view, User user, IJobDAO jobDAO) {</b>
+<b class="fc"><i class="no-highlight">33</i>&nbsp;        this.view = view;</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;        this.user = user;</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;        this.jobDAO = jobDAO;</b>
+<i class="no-highlight">36</i>&nbsp;    }
+<i class="no-highlight">37</i>&nbsp;
+<i class="no-highlight">38</i>&nbsp;    /**
+<i class="no-highlight">39</i>&nbsp;     * Register a new job to the System, according to the user filled fields.
+<i class="no-highlight">40</i>&nbsp;     * @return true if the operation was successful, false otherwise
+<i class="no-highlight">41</i>&nbsp;     */
+<i class="no-highlight">42</i>&nbsp;    @RequiresApi(api = Build.VERSION_CODES.O)
+<i class="no-highlight">43</i>&nbsp;    public boolean registerJob() {
+<b class="fc"><i class="no-highlight">44</i>&nbsp;        view.clearErrors();</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;        boolean success = true;</b>
+<i class="no-highlight">46</i>&nbsp;
+<b class="fc"><i class="no-highlight">47</i>&nbsp;        String title = view.getTitle();</b>
+<b class="fc"><i class="no-highlight">48</i>&nbsp;        if(title.trim().isEmpty()) {</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;            view.showErrorOn(JobFormField.TITLE, &quot;Title can&#39;t be empty&quot;);</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;            success = false;</b>
+<i class="no-highlight">51</i>&nbsp;        }
+<i class="no-highlight">52</i>&nbsp;
+<b class="fc"><i class="no-highlight">53</i>&nbsp;        String description = view.getDescription();</b>
+<i class="no-highlight">54</i>&nbsp;
+<b class="fc"><i class="no-highlight">55</i>&nbsp;        LocalDate startingDate = dateParsingStrategy.parseDate(view.getStartingDate());</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;        if(startingDate == null){</b>
+<b class="nc"><i class="no-highlight">57</i>&nbsp;            view.showErrorOn(JobFormField.STARTING_DATE, &quot;Wrong date format&quot;);</b>
+<b class="nc"><i class="no-highlight">58</i>&nbsp;            success = false;</b>
+<i class="no-highlight">59</i>&nbsp;        }
+<i class="no-highlight">60</i>&nbsp;
+<b class="fc"><i class="no-highlight">61</i>&nbsp;        LocalDate deadline = dateParsingStrategy.parseDate(view.getDeadline());</b>
+<b class="fc"><i class="no-highlight">62</i>&nbsp;        if(deadline == null){</b>
+<b class="fc"><i class="no-highlight">63</i>&nbsp;            view.showErrorOn(JobFormField.DEADLINE, &quot;Wrong date format&quot;);</b>
+<b class="fc"><i class="no-highlight">64</i>&nbsp;            success = false;</b>
+<i class="no-highlight">65</i>&nbsp;        }
+<i class="no-highlight">66</i>&nbsp;
+<b class="fc"><i class="no-highlight">67</i>&nbsp;        Money compensation = parseCompensation(view.getCompensation());</b>
+<b class="fc"><i class="no-highlight">68</i>&nbsp;        if(compensation == null){</b>
+<b class="fc"><i class="no-highlight">69</i>&nbsp;            view.showErrorOn(JobFormField.COMPENSATION,</b>
+<b class="fc"><i class="no-highlight">70</i>&nbsp;                    view.getCompensation() + &quot; is not a valid number&quot;);</b>
+<b class="fc"><i class="no-highlight">71</i>&nbsp;            success = false;</b>
+<i class="no-highlight">72</i>&nbsp;        }
+<i class="no-highlight">73</i>&nbsp;
+<b class="fc"><i class="no-highlight">74</i>&nbsp;        if(success){</b>
+<i class="no-highlight">75</i>&nbsp;            try {
+<b class="fc"><i class="no-highlight">76</i>&nbsp;                jobDAO.saveJob(new Job(user, title, description, compensation,</b>
+<i class="no-highlight">77</i>&nbsp;                        new TimeConstraint(startingDate, deadline)));
+<b class="nc"><i class="no-highlight">78</i>&nbsp;            } catch(Throwable throwable){</b>
+<b class="nc"><i class="no-highlight">79</i>&nbsp;                Log.wtf(&quot;JobFormPresenter&quot;, throwable);</b>
+<b class="nc"><i class="no-highlight">80</i>&nbsp;                view.showError(&quot;An unexpected error has occurred&quot;);</b>
+<b class="nc"><i class="no-highlight">81</i>&nbsp;                success = false;</b>
+<b class="fc"><i class="no-highlight">82</i>&nbsp;            }</b>
+<i class="no-highlight">83</i>&nbsp;        }
+<i class="no-highlight">84</i>&nbsp;
+<i class="no-highlight">85</i>&nbsp;
+<b class="fc"><i class="no-highlight">86</i>&nbsp;        return success;</b>
+<i class="no-highlight">87</i>&nbsp;    }
+<i class="no-highlight">88</i>&nbsp;
+<i class="no-highlight">89</i>&nbsp;
+<i class="no-highlight">90</i>&nbsp;    private static Money parseCompensation(String compensationString) {
+<i class="no-highlight">91</i>&nbsp;        double compensation;
+<i class="no-highlight">92</i>&nbsp;        try {
+<b class="fc"><i class="no-highlight">93</i>&nbsp;            compensation = Double.parseDouble(compensationString);</b>
+<i class="no-highlight">94</i>&nbsp;
+<b class="fc"><i class="no-highlight">95</i>&nbsp;            if(compensation &lt; 0)</b>
+<b class="fc"><i class="no-highlight">96</i>&nbsp;                return null;</b>
+<i class="no-highlight">97</i>&nbsp;
+<b class="nc"><i class="no-highlight">98</i>&nbsp;        } catch (NumberFormatException ne) {</b>
+<b class="nc"><i class="no-highlight">99</i>&nbsp;            return null;</b>
+<b class="fc"><i class="no-highlight">100</i>&nbsp;        }</b>
+<i class="no-highlight">101</i>&nbsp;
+<b class="fc"><i class="no-highlight">102</i>&nbsp;        return Money.of(CurrencyUnit.USD, compensation);</b>
+<i class="no-highlight">103</i>&nbsp;    }
+<i class="no-highlight">104</i>&nbsp;
+<i class="no-highlight">105</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-06-06 23:36</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,217 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Transaction</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">gr.aueb.sweng22.team09.domainlogic.entities</a>
+</div>
+
+<h1>Coverage Summary for Class: Transaction (gr.aueb.sweng22.team09.domainlogic.entities)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Transaction</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (19/19)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package gr.aueb.sweng22.team09.domainlogic.entities;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import android.os.Build;
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;import androidx.annotation.RequiresApi;
+<i class="no-highlight">6</i>&nbsp;
+<i class="no-highlight">7</i>&nbsp;import org.joda.money.Money;
+<i class="no-highlight">8</i>&nbsp;
+<i class="no-highlight">9</i>&nbsp;import java.time.LocalDate;
+<i class="no-highlight">10</i>&nbsp;import java.util.Objects;
+<i class="no-highlight">11</i>&nbsp;import java.util.concurrent.ThreadLocalRandom;
+<i class="no-highlight">12</i>&nbsp;
+<i class="no-highlight">13</i>&nbsp;/**
+<i class="no-highlight">14</i>&nbsp; * An object representing a transaction that took place after the completion
+<i class="no-highlight">15</i>&nbsp; * of a Job.
+<i class="no-highlight">16</i>&nbsp; *
+<i class="no-highlight">17</i>&nbsp; * @author Dimitris Tsirmpas
+<i class="no-highlight">18</i>&nbsp; */
+<i class="no-highlight">19</i>&nbsp;public class Transaction {
+<i class="no-highlight">20</i>&nbsp;    private final long id;
+<i class="no-highlight">21</i>&nbsp;    private final User benefactor;
+<i class="no-highlight">22</i>&nbsp;    private final User receiver;
+<i class="no-highlight">23</i>&nbsp;    private final Money amount;
+<i class="no-highlight">24</i>&nbsp;    private final LocalDate date;
+<i class="no-highlight">25</i>&nbsp;
+<i class="no-highlight">26</i>&nbsp;    /**
+<i class="no-highlight">27</i>&nbsp;     * Create a new Transaction that took place at this time instant.
+<i class="no-highlight">28</i>&nbsp;     * @param benefactor the poster of the job
+<i class="no-highlight">29</i>&nbsp;     * @param receiver the worker of the job
+<i class="no-highlight">30</i>&nbsp;     * @param amount the amount paid as compensation
+<i class="no-highlight">31</i>&nbsp;     */
+<i class="no-highlight">32</i>&nbsp;    @RequiresApi(api = Build.VERSION_CODES.O)
+<i class="no-highlight">33</i>&nbsp;    public Transaction(User benefactor, User receiver, Money amount) {
+<b class="fc"><i class="no-highlight">34</i>&nbsp;        this(ThreadLocalRandom.current().nextLong(), benefactor, receiver, amount, LocalDate.now());</b>
+<i class="no-highlight">35</i>&nbsp;    }
+<i class="no-highlight">36</i>&nbsp;
+<i class="no-highlight">37</i>&nbsp;    /**
+<i class="no-highlight">38</i>&nbsp;     * Create a new Transaction that took place at a specified time.
+<i class="no-highlight">39</i>&nbsp;     * @param id the unique id for this transaction
+<i class="no-highlight">40</i>&nbsp;     * @param benefactor the poster of the job
+<i class="no-highlight">41</i>&nbsp;     * @param receiver the worker of the job
+<i class="no-highlight">42</i>&nbsp;     * @param amount the amount paid as compensation
+<i class="no-highlight">43</i>&nbsp;     * @throws IllegalArgumentException if the given date is in the future
+<i class="no-highlight">44</i>&nbsp;     */
+<i class="no-highlight">45</i>&nbsp;    @RequiresApi(api = Build.VERSION_CODES.O)
+<i class="no-highlight">46</i>&nbsp;    public Transaction(long id, User benefactor, User receiver, Money amount, LocalDate instant)
+<b class="fc"><i class="no-highlight">47</i>&nbsp;            throws IllegalArgumentException {</b>
+<i class="no-highlight">48</i>&nbsp;
+<b class="fc"><i class="no-highlight">49</i>&nbsp;        if(instant.isAfter(LocalDate.now())) {</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;            throw new IllegalArgumentException(&quot;A transaction cannot take place in the future&quot;);</b>
+<i class="no-highlight">51</i>&nbsp;        }
+<i class="no-highlight">52</i>&nbsp;
+<b class="fc"><i class="no-highlight">53</i>&nbsp;        this.id = id;</b>
+<b class="fc"><i class="no-highlight">54</i>&nbsp;        this.benefactor = benefactor;</b>
+<b class="fc"><i class="no-highlight">55</i>&nbsp;        this.receiver = receiver;</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;        this.amount = amount;</b>
+<b class="fc"><i class="no-highlight">57</i>&nbsp;        this.date = instant;</b>
+<i class="no-highlight">58</i>&nbsp;    }
+<i class="no-highlight">59</i>&nbsp;
+<i class="no-highlight">60</i>&nbsp;    /**
+<i class="no-highlight">61</i>&nbsp;     * Get the user who initiated the transaction.
+<i class="no-highlight">62</i>&nbsp;     * @return the poster of the completed job
+<i class="no-highlight">63</i>&nbsp;     */
+<i class="no-highlight">64</i>&nbsp;    public User getBenefactor() {
+<b class="fc"><i class="no-highlight">65</i>&nbsp;        return benefactor;</b>
+<i class="no-highlight">66</i>&nbsp;    }
+<i class="no-highlight">67</i>&nbsp;
+<i class="no-highlight">68</i>&nbsp;    /**
+<i class="no-highlight">69</i>&nbsp;     * Get the receiver of the funds.
+<i class="no-highlight">70</i>&nbsp;     * @return the worker of the completed job
+<i class="no-highlight">71</i>&nbsp;     */
+<i class="no-highlight">72</i>&nbsp;    public User getReceiver() {
+<b class="fc"><i class="no-highlight">73</i>&nbsp;        return receiver;</b>
+<i class="no-highlight">74</i>&nbsp;    }
+<i class="no-highlight">75</i>&nbsp;
+<i class="no-highlight">76</i>&nbsp;    /**
+<i class="no-highlight">77</i>&nbsp;     * Get the amount of money the receiver was awarded.
+<i class="no-highlight">78</i>&nbsp;     * @return the job&#39;s compensation
+<i class="no-highlight">79</i>&nbsp;     */
+<i class="no-highlight">80</i>&nbsp;    public Money getAmount() {
+<b class="fc"><i class="no-highlight">81</i>&nbsp;        return amount;</b>
+<i class="no-highlight">82</i>&nbsp;    }
+<i class="no-highlight">83</i>&nbsp;
+<i class="no-highlight">84</i>&nbsp;    /**
+<i class="no-highlight">85</i>&nbsp;     * Get the date this transaction took place.
+<i class="no-highlight">86</i>&nbsp;     * @return the date of the transaction
+<i class="no-highlight">87</i>&nbsp;     */
+<i class="no-highlight">88</i>&nbsp;    public LocalDate getDate() {
+<b class="fc"><i class="no-highlight">89</i>&nbsp;        return date;</b>
+<i class="no-highlight">90</i>&nbsp;    }
+<i class="no-highlight">91</i>&nbsp;
+<i class="no-highlight">92</i>&nbsp;    /**
+<i class="no-highlight">93</i>&nbsp;     * Returns a unique identifier for this Transaction.
+<i class="no-highlight">94</i>&nbsp;     * @return the id of the transaction
+<i class="no-highlight">95</i>&nbsp;     */
+<i class="no-highlight">96</i>&nbsp;    public long getId() {
+<b class="fc"><i class="no-highlight">97</i>&nbsp;        return id;</b>
+<i class="no-highlight">98</i>&nbsp;    }
+<i class="no-highlight">99</i>&nbsp;
+<i class="no-highlight">100</i>&nbsp;    @Override
+<i class="no-highlight">101</i>&nbsp;    public boolean equals(Object o) {
+<b class="fc"><i class="no-highlight">102</i>&nbsp;        if (this == o) return true;</b>
+<b class="fc"><i class="no-highlight">103</i>&nbsp;        if (o == null || getClass() != o.getClass()) return false;</b>
+<b class="fc"><i class="no-highlight">104</i>&nbsp;        Transaction that = (Transaction) o;</b>
+<b class="fc"><i class="no-highlight">105</i>&nbsp;        return getId() == that.getId();</b>
+<i class="no-highlight">106</i>&nbsp;    }
+<i class="no-highlight">107</i>&nbsp;
+<i class="no-highlight">108</i>&nbsp;    @Override
+<i class="no-highlight">109</i>&nbsp;    public int hashCode() {
+<b class="fc"><i class="no-highlight">110</i>&nbsp;        return Objects.hash(getId());</b>
+<i class="no-highlight">111</i>&nbsp;    }
+<i class="no-highlight">112</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-06-06 23:36</div>
+</div>
+</body>
+</html>

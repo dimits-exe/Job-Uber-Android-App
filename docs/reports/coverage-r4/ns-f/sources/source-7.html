@@ -1,0 +1,103 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > IMoneyAdditionStrategy</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">gr.aueb.sweng22.team09.ui.strategies</a>
+</div>
+
+<h1>Coverage Summary for Class: IMoneyAdditionStrategy (gr.aueb.sweng22.team09.ui.strategies)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">IMoneyAdditionStrategy</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package gr.aueb.sweng22.team09.ui.strategies;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import org.joda.money.CurrencyUnit;
+<i class="no-highlight">4</i>&nbsp;import org.joda.money.Money;
+<i class="no-highlight">5</i>&nbsp;
+<i class="no-highlight">6</i>&nbsp;import java.math.BigDecimal;
+<i class="no-highlight">7</i>&nbsp;
+<i class="no-highlight">8</i>&nbsp;/**
+<i class="no-highlight">9</i>&nbsp; * A strategy that handles the addition of Money objects that may have different Currency.
+<i class="no-highlight">10</i>&nbsp; *
+<i class="no-highlight">11</i>&nbsp; * @author Dimitris Tsirmpas
+<i class="no-highlight">12</i>&nbsp; */
+<i class="no-highlight">13</i>&nbsp;public interface IMoneyAdditionStrategy {
+<i class="no-highlight">14</i>&nbsp;
+<i class="no-highlight">15</i>&nbsp;    /**
+<i class="no-highlight">16</i>&nbsp;     * Returns a new Money object with the Currency of currentMoney and the amount of the sum of the
+<i class="no-highlight">17</i>&nbsp;     * two parameters. If the currency of the moneyToBeAdded is different than that of currentMoney,
+<i class="no-highlight">18</i>&nbsp;     * its amount is converted to the currency of the currentMoney before performing the addition.
+<i class="no-highlight">19</i>&nbsp;     *
+<i class="no-highlight">20</i>&nbsp;     * @param currentMoney   the original sum
+<i class="no-highlight">21</i>&nbsp;     * @param moneyToBeAdded the amount to be added
+<i class="no-highlight">22</i>&nbsp;     * @return the amount of money after the addition, in the currentMoney&#39;s currency
+<i class="no-highlight">23</i>&nbsp;     */
+<i class="no-highlight">24</i>&nbsp;    Money add(Money currentMoney, Money moneyToBeAdded);
+<i class="no-highlight">25</i>&nbsp;
+<i class="no-highlight">26</i>&nbsp;    /**
+<i class="no-highlight">27</i>&nbsp;     * Returns the conversion rate between two currencies.
+<i class="no-highlight">28</i>&nbsp;     *
+<i class="no-highlight">29</i>&nbsp;     * @param from the currency from which to convert
+<i class="no-highlight">30</i>&nbsp;     * @param to   the currency to which to convert
+<i class="no-highlight">31</i>&nbsp;     * @return the conversion rate
+<i class="no-highlight">32</i>&nbsp;     */
+<i class="no-highlight">33</i>&nbsp;    BigDecimal convert(CurrencyUnit from, CurrencyUnit to);
+<i class="no-highlight">34</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-06-06 23:36</div>
+</div>
+</body>
+</html>

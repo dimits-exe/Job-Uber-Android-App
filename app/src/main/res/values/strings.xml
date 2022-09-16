@@ -1,0 +1,66 @@
+<resources>
+    <string name="app_name">Mediocre Job App</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="prompt_username">Username</string>
+    <string name="prompt_password">Password</string>
+    <string name="prompt_email">Email</string>
+    <string name="action_sign_in">Sign In</string>
+    <string name="action_register">Register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be between 6 and 18 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="title_activity_search">SearchActivity</string>
+
+    <!-- Strings used for fragments for navigation -->
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="stats">Statistics</string>
+    <string name='stats_monthly'>Monthly Volume of Transactions:</string>
+    <string name='stats_total'>Total Volume of Transactions:</string>
+    <string name='stats_users'>Amount of Users:</string>
+    <string name='button_return'>Return</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="tab_text_1">Profile</string>
+    <string name="tab_text_2">Search Jobs</string>
+    <string name="tab_text_3">My Jobs</string>
+    <string name="tab_text_4">My Posted Jobs</string>
+    <string name="tab_text_5">Statistics</string>
+    <string name="ok">\"O.K\"</string>
+
+    <string name="title_activity_registration">RegistrationActivity</string>
+    <string name="registration_title">Sign Up</string>
+    <string name="user_details_tag">User Details:</string>
+    <string name="personal_details_tag">Personal Details:</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_first_name">First Name</string>
+    <string name="hint_last_name">Last Name</string>
+    <string name="hint_telephone">Phone Number</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_city">City of Residence</string>
+    <string name="hint_address">Address</string>
+
+    <string name="submit">Submit</string>
+    <string name="balance">Balance:</string>
+    <string name="profile_button_save">Save</string>
+    <string name="starting_date_hint">Preferred Starting Date (dd-mm-yyyy)</string>
+    <string name="deadline_hint">Maximum Deadline (dd-mm-yyyy)</string>
+    <string name="compensation_hint">Minimum Compensation (USD)</string>
+    <string name="mark_interested">Mark Interested</string>
+    <string name="refresh">Refresh</string>
+
+    <string name="title_activity_job_form">JobFormActivity</string>
+    <string name="new_job">Create New Job</string>
+    <string name="job_hint_title">Title</string>
+    <string name="job_hint_description">Short Description</string>
+    <string name="job_hint_compensation">Compensation (USD)</string>
+    <string name="job_hint_starting_date">Starting Date (dd-mm-yyyy)</string>
+    <string name="job_hint_deadline">Deadline (dd-mm-yyyy)</string>
+
+    <string name="new_job_button">Create a new Job</string>
+    <string name="search_tip">Leave a field blank to ignore the constraint</string>
+    <string name="login_test_hint">Use username = testuser\n password = 12345678 for testing</string>
+</resources>
